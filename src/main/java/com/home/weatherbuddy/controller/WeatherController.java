@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequestMapping("/inbound")
 public class WeatherController {
@@ -26,6 +28,11 @@ public class WeatherController {
     @GetMapping(value = "/current/{id}")
     public String returnCurrentTime(@PathVariable("id") int station_id, Model model) {
         WeatherData currentWeather = weatherService.getCurrentWeather(station_id);
+        if (currentWeather != null && currentWeather.getTimestamp() != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy hh:mm:ss a");
+            String formattedTimestamp = currentWeather.getTimestamp().format(formatter);
+            model.addAttribute("formattedTimestamp", formattedTimestamp);
+        }
         model.addAttribute("currentWeather", currentWeather);
         return "weather";
     }

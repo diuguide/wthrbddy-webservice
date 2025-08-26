@@ -39,11 +39,13 @@
 <body>
 <div class="container">
     <div class="values">
-        <div>🌡️ <span th:text="${currentWeather.temp}"></span>°C</div>
+        <div>🌡️ <span th:text="${currentWeather.temp}"></span>°F</div>
         <div>💧 <span th:text="${currentWeather.humidity}"></span>%</div>
     </div>
     <div class="station">Station ID: <span th:text="${currentWeather.stationId}"></span></div>
-    <div class="timestamp">Last Updated: <span th:text="${currentWeather.timestamp}"></span></div>
+    <div class="timestamp">
+        Last Updated: <span th:text="${formattedTimestamp}"></span>
+    </div>
 </div>
 </body>
 </html>
