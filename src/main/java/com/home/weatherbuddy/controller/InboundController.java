@@ -21,7 +21,6 @@ public class InboundController {
     @GetMapping("/{temp}-{humidity}-{station_id}")
     @ResponseBody
     public String getTempAndHumidity(@PathVariable("temp") Double temp, @PathVariable("humidity") Double humidity , @PathVariable("station_id") int system_id) {
-        logger.info("Received inbound data to controller - Temp: " + temp + ", Humidity: " + humidity + ", Station ID: " + system_id);
         return inboundService.processInboundData(temp, humidity, system_id);
     }
 

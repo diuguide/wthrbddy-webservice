@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/station")
 public class OutboundController {
 
-    private final Logger logger = LoggerFactory.getLogger(OutboundController.class);
     private final OutboundService outboundService;
 
     @Autowired
@@ -26,9 +25,7 @@ public class OutboundController {
     @GetMapping(value = "/{id}")
     public String returnCurrentTime(@PathVariable("id") int station_id, Model model) {
         StationInstance currentWeather = outboundService.getStationInstanceById(station_id);
-        logger.info("retreived data in outbound controller: " + currentWeather.toString());
         if (currentWeather != null && currentWeather.getTimestamp() != null) {
-            logger.info("Returning data for station ID: " + station_id);
             model.addAttribute("currentWeather", currentWeather);
             model.addAttribute("formattedTimestamp", currentWeather.getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
