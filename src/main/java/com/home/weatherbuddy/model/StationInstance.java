@@ -12,7 +12,6 @@ public class StationInstance {
     private Double humidity;
     private int stationId;
 
-
     public StationInstance() {
     }
 

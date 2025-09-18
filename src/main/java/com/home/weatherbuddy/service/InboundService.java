@@ -1,7 +1,6 @@
 package com.home.weatherbuddy.service;
 
 import com.home.weatherbuddy.model.StationInstance;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service

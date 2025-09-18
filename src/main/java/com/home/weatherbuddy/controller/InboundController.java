@@ -1,7 +1,6 @@
 package com.home.weatherbuddy.controller;
 
 import com.home.weatherbuddy.service.InboundService;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/inbound")
 public class InboundController {
     private final InboundService inboundService;
-
-    private final Logger logger = org.slf4j.LoggerFactory.getLogger(InboundController.class);
 
     @Autowired
     public InboundController(InboundService inboundService) {
