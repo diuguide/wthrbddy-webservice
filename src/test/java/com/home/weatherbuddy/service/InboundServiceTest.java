@@ -92,7 +92,7 @@ class InboundServiceTest {
         assertEquals(stationIdUpdate, after.getStationId());
         // Timestamp should be refreshed in update path
         assertNotNull(after.getTimestamp());
-        assertTrue(after.getTimestamp().isAfter(initialTimestamp) || !after.getTimestamp().equals(initialTimestamp));
+        assertNotEquals(initialTimestamp, after.getTimestamp());
     }
 
     @Test
