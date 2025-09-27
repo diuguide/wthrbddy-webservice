@@ -25,7 +25,8 @@ public class OutboundController {
         StationInstance currentWeather = outboundService.getStationInstanceById(station_id);
         if (currentWeather != null && currentWeather.getTimestamp() != null) {
             model.addAttribute("currentWeather", currentWeather);
-            model.addAttribute("formattedTimestamp", currentWeather.getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            model.addAttribute("formattedTimestamp",
+                    currentWeather.getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
         return "weather";
     }

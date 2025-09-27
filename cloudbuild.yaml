@@ -1,0 +1,48 @@
+steps:
+  # Step 1: Lint and compile (runs Checkstyle/SpotBugs if configured in pom.xml)
+  - name: "maven:3.9.6-eclipse-temurin-17"
+    entrypoint: "mvn"
+    args: ["clean", "compile"]
+    volumes:
+      - name: "maven-repo"
+        path: "/root/.m2"
+
+  # Step 2: Run tests (JUnit, integration tests)
+  - name: "maven:3.9.6-eclipse-temurin-17"
+    entrypoint: "mvn"
+    args: ["test"]
+    volumes:
+      - name: "maven-repo"
+        path: "/root/.m2"
+
+  # Step 3: Full verify (includes linting checks, tests, and packaging)
+  - name: "maven:3.9.6-eclipse-temurin-17"
+    entrypoint: "mvn"
+    args: ["verify", "-DskipTests=true"] # Avoid test duplication; Step 2 already tested
+    volumes:
+      - name: "maven-repo"
+        path: "/root/.m2"
+
+  # Step 4: Package the app (creates JAR/WAR)
+  - name: "maven:3.9.6-eclipse-temurin-17"
+    entrypoint: "mvn"
+    args: ["package", "-DskipTests=true"] # Skip tests here to avoid duplication
+    volumes:
+      - name: "maven-repo"
+        path: "/root/.m2"
+
+  # Step 5: Deploy to App Engine (optional; comment out if build-only)
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: "gcloud"
+    args:
+      - "app"
+      - "deploy"
+    volumes:
+      - name: "maven-repo"
+        path: "/root/.m2"
+
+timeout: "1200s" # 20 minutes max
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+# Reuse Maven cache across steps by mounting the same volume
