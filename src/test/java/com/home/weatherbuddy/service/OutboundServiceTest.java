@@ -17,8 +17,8 @@ class OutboundServiceTest {
 
     @BeforeEach
     void setUp() {
-        outboundService = new OutboundService();
-        memoryService = MemoryService.getInstance();
+        memoryService = new MemoryService();
+        outboundService = new OutboundService(memoryService);
 
         stationIdExisting = 2001;
         stationIdMissing = 2002;

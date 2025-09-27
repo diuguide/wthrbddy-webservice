@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class InboundService {
 
-    private final MemoryService memoryService = MemoryService.getInstance();
+    private final MemoryService memoryService;
+
+    public InboundService(MemoryService memoryService) {
+        this.memoryService = memoryService;
+    }
 
     public String processInboundData(Double temp, Double humidity, int station_id) {
         String key = "station_" + station_id;

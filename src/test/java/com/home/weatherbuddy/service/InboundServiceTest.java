@@ -19,8 +19,8 @@ class InboundServiceTest {
 
     @BeforeEach
     void setUp() {
-        inboundService = new InboundService();
-        memoryService = MemoryService.getInstance();
+        memoryService = new MemoryService();
+        inboundService = new InboundService(memoryService);
         stationIdCreate = 1001;
         stationIdUpdate = 1002;
         stationIdNulls = 1003;

@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OutboundService {
-    private final MemoryService memoryService = MemoryService.getInstance();
+    private final MemoryService memoryService;
+
+    public OutboundService(MemoryService memoryService) {
+        this.memoryService = memoryService;
+    }
 
     public StationInstance getStationInstanceById(int stationId) {
         String key = "station_" + stationId;

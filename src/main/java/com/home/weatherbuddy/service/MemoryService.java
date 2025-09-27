@@ -1,6 +1,5 @@
 package com.home.weatherbuddy.service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.home.weatherbuddy.model.StationInstance;
@@ -8,18 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MemoryService {
-    private static MemoryService instance;
     private final Map<String, StationInstance> storage;
 
-    private MemoryService() {
-        this.storage = new HashMap<>();
-    }
-
-    public static synchronized MemoryService getInstance() {
-        if (instance == null) {
-            instance = new MemoryService();
-        }
-        return instance;
+    public MemoryService() {
+        // Concurrent storage for thread-safety in a web app environment
+        this.storage = new java.util.concurrent.ConcurrentHashMap<>();
     }
 
     public void create(String key, StationInstance value) {

@@ -8,15 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryServiceTest {
 
-    private final MemoryService memoryService = MemoryService.getInstance();
+    private final MemoryService memoryService = new MemoryService();
 
-    @Test
-    @DisplayName("getInstance returns singleton instance")
-    void getInstance_returnsSameSingleton() {
-        MemoryService a = MemoryService.getInstance();
-        MemoryService b = MemoryService.getInstance();
-        assertSame(a, b, "MemoryService should be a singleton");
-    }
+    // Singleton removed; MemoryService is Spring-managed and can be instantiated
+    // for unit tests.
 
     @Test
     @DisplayName("create + read stores and returns value")
