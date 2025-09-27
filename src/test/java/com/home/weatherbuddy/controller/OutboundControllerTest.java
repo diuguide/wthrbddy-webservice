@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = OutboundController.class, properties = {
-    "spring.thymeleaf.enabled=false"
+        "spring.thymeleaf.enabled=false"
 })
 class OutboundControllerTest {
 
@@ -32,7 +32,6 @@ class OutboundControllerTest {
 
     @MockBean
     private OutboundService outboundService;
-
 
     @Test
     void returnCurrentTime_addsModelAndReturnsWeather_whenStationFound() throws Exception {
@@ -74,8 +73,8 @@ class OutboundControllerTest {
 
                 @Override
                 protected void renderMergedOutputModel(Map<String, Object> model,
-                                                      HttpServletRequest request,
-                                                      HttpServletResponse response) {
+                        HttpServletRequest request,
+                        HttpServletResponse response) {
                     // no-op: avoid invoking Thymeleaf engine
                 }
             };

@@ -50,8 +50,8 @@ class InboundServiceTest {
         String result = inboundService.processInboundData(temp, humidity, stationIdCreate);
 
         assertEquals("Temperature: " + temp +
-                        " Humidity: " + humidity +
-                        " Station ID: " + stationIdCreate,
+                " Humidity: " + humidity +
+                " Station ID: " + stationIdCreate,
                 result);
 
         assertTrue(memoryService.exists(key));
@@ -71,9 +71,9 @@ class InboundServiceTest {
         StationInstance existing = new StationInstance(10.0, 20.0, stationIdUpdate);
         memoryService.create(key, existing);
         assertTrue(memoryService.exists(key));
-    StationInstance before = memoryService.read(key);
-    assertNotNull(before.getTimestamp());
-    java.time.LocalDateTime initialTimestamp = before.getTimestamp();
+        StationInstance before = memoryService.read(key);
+        assertNotNull(before.getTimestamp());
+        java.time.LocalDateTime initialTimestamp = before.getTimestamp();
 
         Double newTemp = 30.5;
         Double newHumidity = 70.0;
@@ -81,18 +81,18 @@ class InboundServiceTest {
         String result = inboundService.processInboundData(newTemp, newHumidity, stationIdUpdate);
 
         assertEquals("Temperature: " + newTemp +
-                        " Humidity: " + newHumidity +
-                        " Station ID: " + stationIdUpdate,
+                " Humidity: " + newHumidity +
+                " Station ID: " + stationIdUpdate,
                 result);
 
-    StationInstance after = memoryService.read(key);
+        StationInstance after = memoryService.read(key);
         assertNotNull(after);
         assertEquals(newTemp, after.getTemp());
         assertEquals(newHumidity, after.getHumidity());
         assertEquals(stationIdUpdate, after.getStationId());
         // Timestamp should be refreshed in update path
-    assertNotNull(after.getTimestamp());
-    assertTrue(after.getTimestamp().isAfter(initialTimestamp) || !after.getTimestamp().equals(initialTimestamp));
+        assertNotNull(after.getTimestamp());
+        assertTrue(after.getTimestamp().isAfter(initialTimestamp) || !after.getTimestamp().equals(initialTimestamp));
     }
 
     @Test
@@ -106,8 +106,8 @@ class InboundServiceTest {
         String result = inboundService.processInboundData(temp, humidity, stationIdNulls);
 
         assertEquals("Temperature: " + temp +
-                        " Humidity: " + humidity +
-                        " Station ID: " + stationIdNulls,
+                " Humidity: " + humidity +
+                " Station ID: " + stationIdNulls,
                 result);
 
         StationInstance stored = memoryService.read(key);
