@@ -111,8 +111,8 @@ class MemoryServiceTest {
             String printed = memoryService.printAllContents();
             assertNotNull(printed);
             assertTrue(printed.startsWith("Memory Contents:\n"), "Should start with header");
-            assertTrue(printed.contains(key1 + " -> StationInstance{"), "Should contain first key line");
-            assertTrue(printed.contains(key2 + " -> StationInstance{"), "Should contain second key line");
+            assertTrue(printed.contains(key1 + " -> WeatherData{"), "Should contain first key line");
+            assertTrue(printed.contains(key2 + " -> WeatherData{"), "Should contain second key line");
         } finally {
             memoryService.delete(key1);
             memoryService.delete(key2);
