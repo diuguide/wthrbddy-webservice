@@ -27,3 +27,5 @@ HELP.md
 mvnw.cmd
 mvnw
 weatherBuddy.iml
+.idea/
+.vscode/
